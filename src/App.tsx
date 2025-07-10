@@ -1,4 +1,5 @@
 import CreateCustomer from '@/features/customer/CreateCustomer';
+import Customer from '@/features/customer/Customer';
 
 import './App.css';
 
@@ -14,7 +15,13 @@ export default function App() {
     <div className="app">
       <h1 className="app__title">The React-Redux Bank</h1>
 
-      <CreateCustomer />
+      {!customerExists ? (
+        <CreateCustomer />
+      ) : (
+        <>
+          <Customer />
+        </>
+      )}
     </div>
   );
 }
