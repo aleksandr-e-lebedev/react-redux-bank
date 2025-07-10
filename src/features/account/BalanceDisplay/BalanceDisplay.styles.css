@@ -1,0 +1,10 @@
+.balance {
+  min-width: 18rem;
+  padding: 2.4rem 3.2rem;
+
+  font-size: 3.2rem;
+  font-weight: bold;
+  text-align: center;
+
+  background-color: #f7f7f7;
+}

@@ -1,6 +1,7 @@
 import CreateCustomer from '@/features/customer/CreateCustomer';
 import Customer from '@/features/customer/Customer';
 import AccountOperations from '@/features/account/AccountOperations';
+import BalanceDisplay from '@/features/account/BalanceDisplay';
 
 import './App.css';
 
@@ -22,6 +23,7 @@ export default function App() {
         <>
           <Customer />
           <AccountOperations />
+          <BalanceDisplay className="app__balance" />
         </>
       )}
     </div>

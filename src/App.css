@@ -8,3 +8,9 @@
 .app__title {
   font-size: 3.2rem;
 }
+
+.app__balance {
+  position: absolute;
+  top: 4rem;
+  right: 4rem;
+}
