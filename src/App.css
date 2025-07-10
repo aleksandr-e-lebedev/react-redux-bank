@@ -1,5 +1,8 @@
 .app {
   padding: 4rem;
+
+  display: grid;
+  gap: 2rem;
 }
 
 .app__title {

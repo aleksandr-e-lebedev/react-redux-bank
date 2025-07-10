@@ -1,0 +1,25 @@
+.new-customer {
+  display: grid;
+  gap: 2rem;
+}
+
+.new-customer__title {
+  font-size: 2.4rem;
+}
+
+.new-customer__inputs {
+  padding: 3.2rem;
+
+  display: grid;
+  gap: 2rem;
+
+  background-color: #f7f7f7;
+}
+
+.new-customer__input {
+  margin: 0 0.8rem;
+}
+
+.new-customer__button {
+  justify-self: start;
+}
