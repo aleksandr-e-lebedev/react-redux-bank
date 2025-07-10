@@ -36,7 +36,14 @@ export const customerSlice = createAppSlice({
       },
     },
   },
+  // These selectors receive the slice state as their first argument.
+  selectors: {
+    selectCustomerFullName: (customer) => customer.fullName,
+  },
 });
 
 // Action creators are generated for each case reducer function.
 export const { created } = customerSlice.actions;
+
+// Selectors returned by `slice.selectors` take the root state as their first argument.
+export const { selectCustomerFullName } = customerSlice.selectors;
