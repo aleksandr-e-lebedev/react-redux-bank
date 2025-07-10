@@ -1,5 +1,6 @@
 import CreateCustomer from '@/features/customer/CreateCustomer';
 import Customer from '@/features/customer/Customer';
+import AccountOperations from '@/features/account/AccountOperations';
 
 import './App.css';
 
@@ -20,6 +21,7 @@ export default function App() {
       ) : (
         <>
           <Customer />
+          <AccountOperations />
         </>
       )}
     </div>
