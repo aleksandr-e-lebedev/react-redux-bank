@@ -1,3 +1,5 @@
+import type { PayloadAction } from '@reduxjs/toolkit';
+
 import { createAppSlice } from '@/app/createAppSlice';
 
 export interface CustomerSliceState {
@@ -12,9 +14,29 @@ const initialState: CustomerSliceState = {
   createdAt: '',
 };
 
+type Customer = CustomerSliceState;
+
 // If you are not using async thunks you can use the standalone `createSlice`.
 export const customerSlice = createAppSlice({
   name: 'customer',
   initialState,
-  reducers: {},
+  reducers: {
+    created: {
+      prepare: ({ fullName, nationalID }: Omit<Customer, 'createdAt'>) => {
+        return {
+          payload: {
+            fullName,
+            nationalID,
+            createdAt: new Date().toISOString(), // Side Effect
+          },
+        };
+      },
+      reducer: (_state, action: PayloadAction<Customer>) => {
+        return action.payload;
+      },
+    },
+  },
 });
+
+// Action creators are generated for each case reducer function.
+export const { created } = customerSlice.actions;

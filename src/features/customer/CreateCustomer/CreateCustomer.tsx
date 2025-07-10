@@ -4,16 +4,23 @@ import Input from '@/components/Input';
 import Label from '@/components/Label';
 import Button from '@/components/Button';
 
+import { useAppDispatch } from '@/app/hooks';
+import { created } from '../customerSlice';
+
 import './CreateCustomer.styles.css';
 
 export default function CreateCustomer() {
   // Local UI State
   const [fullName, setFullName] = useState('');
-  const [nationalId, setNationalId] = useState('');
+  const [nationalID, setNationalID] = useState('');
+
+  // Global UI State
+  const dispatch = useAppDispatch();
 
   function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    return;
+    if (!fullName && !nationalID) return;
+    dispatch(created({ fullName, nationalID }));
   }
 
   return (
@@ -40,9 +47,9 @@ export default function CreateCustomer() {
             id="national-id"
             className="new-customer__input"
             type="text"
-            value={nationalId}
+            value={nationalID}
             onChange={(e) => {
-              setNationalId(e.target.value);
+              setNationalID(e.target.value);
             }}
           />
         </div>

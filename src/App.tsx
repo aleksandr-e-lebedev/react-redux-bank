@@ -3,12 +3,13 @@ import Customer from '@/features/customer/Customer';
 import AccountOperations from '@/features/account/AccountOperations';
 import BalanceDisplay from '@/features/account/BalanceDisplay';
 
+import { useAppSelector } from './app/hooks';
+
 import './App.css';
 
 export default function App() {
   // Global UI State
-  const fullName = '%NAME%';
-  const nationalID = 12345;
+  const { fullName, nationalID } = useAppSelector((state) => state.customer);
 
   // Derived Global UI State
   const customerExists = fullName && nationalID ? true : false;
