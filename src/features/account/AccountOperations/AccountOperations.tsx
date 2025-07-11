@@ -8,8 +8,13 @@ import Select from '@/components/Select';
 import { useLazyConvertCurrencyQuery } from '@/services/frankfurterApi';
 import type { CurrencyToConvert } from '@/services/frankfurterApi';
 
-import { useAppDispatch } from '@/app/hooks';
-import { moneyDeposited, moneyWithdrawn } from '../accountSlice';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import {
+  moneyDeposited,
+  moneyWithdrawn,
+  loanRequested,
+  selectLoan,
+} from '../accountSlice';
 
 import './AccountOperations.styles.css';
 
@@ -126,9 +131,16 @@ function RequestLoanForm() {
   const [amount, setAmount] = useState(0);
   const [purpose, setPurpose] = useState('');
 
+  const dispatch = useAppDispatch();
+
   function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    return;
+
+    if (!amount || !purpose) return;
+
+    dispatch(loanRequested({ amount, purpose }));
+    setAmount(0);
+    setPurpose('');
   }
 
   return (
@@ -158,14 +170,9 @@ function RequestLoanForm() {
   );
 }
 
-interface LoanToRequest {
-  amount: number;
-  purpose: string;
-}
-
 function PayLoanForm() {
   // Global UI State
-  const loan: LoanToRequest = { amount: 1_000, purpose: 'New House' };
+  const loan = useAppSelector(selectLoan);
 
   function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -183,7 +190,8 @@ function PayLoanForm() {
 }
 
 export default function AccountOperations() {
-  const loan: LoanToRequest = { amount: 1_000, purpose: 'New House' };
+  // Global UI State
+  const loan = useAppSelector(selectLoan);
 
   return (
     <div className="account-operations">

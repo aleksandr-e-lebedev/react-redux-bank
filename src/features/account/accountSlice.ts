@@ -25,6 +25,11 @@ interface MoneyToDeposit {
   currency: 'USD';
 }
 
+interface LoanToRequest {
+  amount: number;
+  purpose: string;
+}
+
 // If you are not using async thunks you can use the standalone `createSlice`.
 export const accountSlice = createAppSlice({
   name: 'account',
@@ -40,14 +45,23 @@ export const accountSlice = createAppSlice({
       state.balance = state.balance - action.payload;
       state.deposit = state.deposit - action.payload;
     },
+    loanRequested: (state, action: PayloadAction<LoanToRequest>) => {
+      if (state.loan.amount > 0) return;
+
+      state.balance = state.balance + action.payload.amount;
+      state.loan.amount = action.payload.amount;
+      state.loan.purpose = action.payload.purpose;
+    },
   },
   selectors: {
     selectBalance: (account) => account.balance,
+    selectLoan: (account) => account.loan,
   },
 });
 
 // Action creators are generated for each case reducer function.
-export const { moneyDeposited, moneyWithdrawn } = accountSlice.actions;
+export const { moneyDeposited, moneyWithdrawn, loanRequested } =
+  accountSlice.actions;
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.
-export const { selectBalance } = accountSlice.selectors;
+export const { selectBalance, selectLoan } = accountSlice.selectors;
