@@ -13,6 +13,7 @@ import {
   moneyDeposited,
   moneyWithdrawn,
   loanRequested,
+  loanPaidBack,
   selectLoan,
 } from '../accountSlice';
 
@@ -173,10 +174,11 @@ function RequestLoanForm() {
 function PayLoanForm() {
   // Global UI State
   const loan = useAppSelector(selectLoan);
+  const dispatch = useAppDispatch();
 
   function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    return;
+    dispatch(loanPaidBack());
   }
 
   return (
