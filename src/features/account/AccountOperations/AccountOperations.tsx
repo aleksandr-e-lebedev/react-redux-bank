@@ -9,7 +9,7 @@ import { useLazyConvertCurrencyQuery } from '@/services/frankfurterApi';
 import type { CurrencyToConvert } from '@/services/frankfurterApi';
 
 import { useAppDispatch } from '@/app/hooks';
-import { moneyDeposited } from '../accountSlice';
+import { moneyDeposited, moneyWithdrawn } from '../accountSlice';
 
 import './AccountOperations.styles.css';
 
@@ -92,9 +92,15 @@ function WithdrawForm() {
   // Local UI State
   const [amount, setAmount] = useState(0);
 
+  const dispatch = useAppDispatch();
+
   function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    return;
+
+    if (!amount) return;
+
+    dispatch(moneyWithdrawn(amount));
+    setAmount(0);
   }
 
   return (

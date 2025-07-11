@@ -34,6 +34,12 @@ export const accountSlice = createAppSlice({
       state.balance = state.balance + action.payload.amount;
       state.deposit = state.deposit + action.payload.amount;
     },
+    moneyWithdrawn: (state, action: PayloadAction<number>) => {
+      if (state.deposit === 0) return;
+
+      state.balance = state.balance - action.payload;
+      state.deposit = state.deposit - action.payload;
+    },
   },
   selectors: {
     selectBalance: (account) => account.balance,
@@ -41,7 +47,7 @@ export const accountSlice = createAppSlice({
 });
 
 // Action creators are generated for each case reducer function.
-export const { moneyDeposited } = accountSlice.actions;
+export const { moneyDeposited, moneyWithdrawn } = accountSlice.actions;
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.
 export const { selectBalance } = accountSlice.selectors;
