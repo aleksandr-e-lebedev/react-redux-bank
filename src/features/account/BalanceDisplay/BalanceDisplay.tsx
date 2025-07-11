@@ -1,3 +1,6 @@
+import { useAppSelector } from '@/app/hooks';
+import { selectBalance } from '../accountSlice';
+
 import './BalanceDisplay.styles.css';
 
 function formatCurrency(value: number) {
@@ -13,7 +16,7 @@ export interface BalanceDisplayProps {
 
 export default function BalanceDisplay({ className }: BalanceDisplayProps) {
   // Global UI State
-  const balance = 123456;
+  const balance = useAppSelector(selectBalance);
 
   return (
     <div className={className ? `balance ${className}` : 'balance'}>

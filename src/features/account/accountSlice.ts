@@ -23,4 +23,10 @@ export const accountSlice = createAppSlice({
   name: 'account',
   initialState,
   reducers: {},
+  selectors: {
+    selectBalance: (account) => account.balance,
+  },
 });
+
+// Selectors returned by `slice.selectors` take the root state as their first argument.
+export const { selectBalance } = accountSlice.selectors;
