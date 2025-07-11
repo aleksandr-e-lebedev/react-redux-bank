@@ -5,6 +5,12 @@ import Input from '@/components/Input';
 import Button from '@/components/Button';
 import Select from '@/components/Select';
 
+import { useLazyConvertCurrencyQuery } from '@/services/frankfurterApi';
+import type { CurrencyToConvert } from '@/services/frankfurterApi';
+
+import { useAppDispatch } from '@/app/hooks';
+import { moneyDeposited } from '../accountSlice';
+
 import './AccountOperations.styles.css';
 
 type Currency = 'USD' | 'EUR' | 'GBP';
@@ -15,11 +21,36 @@ function DepositForm() {
   const [currency, setCurrency] = useState<Currency>('USD');
 
   // Global Remote State
-  const currencyIsConverting = false;
+  const [convertCurrency, conversionResult] = useLazyConvertCurrencyQuery();
+  const { isFetching } = conversionResult;
+
+  // Derived Global Remote State
+  const currencyIsConverting = isFetching;
+
+  const dispatch = useAppDispatch();
+
+  async function convertAndDeposit(currencyToConvert: CurrencyToConvert) {
+    const result = await convertCurrency(currencyToConvert, true);
+    const data = result.data;
+
+    if (!data) return;
+
+    dispatch(moneyDeposited({ amount: data.rates.USD, currency: 'USD' }));
+  }
 
   function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    return;
+
+    if (!amount) return;
+
+    if (currency === 'USD') {
+      dispatch(moneyDeposited({ amount, currency }));
+    } else {
+      void convertAndDeposit({ amount, currency });
+    }
+
+    setAmount(0);
+    setCurrency('USD');
   }
 
   return (
