@@ -1,69 +1,40 @@
-# React + TypeScript + Vite
+# The React-Redux Bank
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Версия 1.0.0
 
-Currently, two official plugins are available:
+## Описание
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Данный проект реализован в рамках учебного курса [The Ultimate React Course 2025: React, Next.js, Redux & More](https://www.udemy.com/course/the-ultimate-react-course/) на платформе [Udemy](https://www.udemy.com/) с целью расширения и углубления знаний при работе с [React](https://react.dev/) для создания современных веб-приложений.
 
-## Expanding the ESLint configuration
+Приложение для демонстрации работы Redux.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Используемые технологии
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+HTML, CSS, JavaScript (ES6+), TypeScript, React, Redux (Redux Toolkit), Git, Vite
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Используемые API
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Приложение выполняет запросы к [Frankfurter API](https://frankfurter.dev/).
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Функциональные возможности
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. создание нового пользователя;
+2. внесение денег на депозит;
+3. конвертирование валюты при внесении на депозит, если она отличается от US Dollar;
+4. снятие денег с депозита;
+5. взятие кредита;
+6. погашение кредита.
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Как развернуть проект
+
+1. Клонируйте репозиторий:
+
+   `git clone https://github.com/aleksandr-e-lebedev/react-redux-bank.git`
+
+2. Для установки необходимых пакетов выполните:
+
+   `npm install`
+
+3. Запуск:
+   - открыть проект в режиме development: `npm run dev`;
+   - собрать проект для production: `npm run build`.

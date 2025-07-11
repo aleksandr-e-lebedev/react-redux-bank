@@ -1,0 +1,34 @@
+.account-operations {
+  display: grid;
+  gap: 2rem;
+}
+
+.account-operations__title {
+  font-size: 2.4rem;
+}
+
+.account-operations__inputs {
+  padding: 3.2rem;
+
+  display: grid;
+  gap: 2rem;
+
+  background-color: #f7f7f7;
+}
+
+.account-operations__input {
+  margin: 0 0.8rem;
+}
+
+.account-operations__select {
+  margin: 0 0.8rem;
+}
+
+.pay-loan-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pay-loan-form__text {
+  font-size: 1.6rem;
+}
